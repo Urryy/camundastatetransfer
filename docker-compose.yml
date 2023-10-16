@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  camundastate:
+    image: ${DOCKER_REGISTRY-}camundastate
+    build:
+      context: .
+      dockerfile: CamundaState/Dockerfile
+
+  camunda:
+    container_name: camunda-dev
+    ports:
+    - 8081:8080
+    image: camunda/camunda-bpm-platform:7.17.0
+    environment:
+      DB_USERNAME: DbUsername
+      DB_PASSWORD: DbPassword
+      DB_URL: jdbc:postgresql://yourConnectionStringToCamunda
+      DB_DATABASE: yourNameDb
+      DB_DRIVER: org.postgresql.Driver
